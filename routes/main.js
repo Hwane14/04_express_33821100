@@ -9,7 +9,7 @@ router.get("/about", (req, res) => res.send ("<h1>This is the about page</h1>"))
 router.get("/contact", (req, res) => res.send("<h1>Contact me via hwane001@campus.goldsmiths.ac.uk"));
 router.get("/date", (req, res) => {
     const now = new Date(); // Istantiate a new Date object
-    // Format the date and time so it is mor readable
+    // Format the date and time so it is more readable
     const formattedDateTime = now.toLocaleString("en-GB", {
         weekday: "long",    // e.g., Tuesday
         year: "numeric",    // e.g., 2025
@@ -22,10 +22,14 @@ router.get("/date", (req, res) => {
     });
         res.send(`<h1>Today's date and time is ${formattedDateTime}</h1>`);
     });
+
+    // Extension routes
+    
+    //':name' is a route parameter accessible via 'req.params.name' 
     router.get("/welcome/:name", (req, res) => res.send(`<h1>Welcome ${req.params.name}</h1>`));
     router.get("/chain", (req, res, next) => {
         console.log("This comes from the 1st part of the chain :)");
-        next()
+        next() // Pass control to 2nd handler
     }, (req, res) => {
         res.send("<h1>This comes from the 2nd part of the chain ;)");
     });
