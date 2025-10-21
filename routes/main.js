@@ -20,21 +20,20 @@ router.get("/date", (req, res) => {
         second: "2-digit",  // e.g., 05
         hour12: false       // 24-hour format
     });
-        res.send(`<h1>Today's date and time is ${formattedDateTime}</h1>`);
-    });
-
-    // Extension routes
+    res.send(`<h1>Today's date and time is ${formattedDateTime}</h1>`);
+});
+// Extension routes
     
-    //':name' is a route parameter accessible via 'req.params.name' 
-    router.get("/welcome/:name", (req, res) => res.send(`<h1>Welcome ${req.params.name}</h1>`));
-    router.get("/chain", (req, res, next) => {
-        console.log("This comes from the 1st part of the chain :)");
-        next() // Pass control to 2nd handler
-    }, (req, res) => {
-        res.send("<h1>This comes from the 2nd part of the chain ;)");
-    });
-    // Use .. to go into parent folder where a.html is
-    router.get("/file", (req, res) => res.sendFile(path.join(__dirname, "..", "a.html"))); // Use path.join to safely construct full path to file
+//':name' is a route parameter accessible via 'req.params.name' 
+router.get("/welcome/:name", (req, res) => res.send(`<h1>Welcome ${req.params.name}</h1>`));
+router.get("/chain", (req, res, next) => {
+    console.log("This comes from the 1st part of the chain :)");
+    next() // Pass control to 2nd handler
+}, (req, res) => {
+    res.send("<h1>This comes from the 2nd part of the chain ;)");
+});
+// Use .. to go into parent folder where a.html is
+router.get("/file", (req, res) => res.sendFile(path.join(__dirname, "..", "a.html"))); // Use path.join to safely construct full path to file
 
 // Export the router object so index.js can access it
 module.exports = router;
